@@ -1,4 +1,4 @@
-package spectral
+package bleep_spectral
 
 import "math/cmplx"
 

@@ -1,4 +1,4 @@
-module github.com/bspaans/bleep/spectral
+module github.com/bspaans/bleep_spectral
 
 go 1.14
 

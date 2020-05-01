@@ -1,5 +1,5 @@
 // Spectral analysis tools; analyse and modify audio data in the frequency domain.
-package spectral
+package bleep_spectral
 
 import (
 	"fmt"
