@@ -1,4 +1,4 @@
-package plot
+package spectral
 
 import (
 	"fmt"
@@ -9,7 +9,6 @@ import (
 
 	"github.com/bspaans/bleep/audio"
 	"github.com/bspaans/bleep/generators"
-	"github.com/bspaans/bleep/spectral"
 	"gonum.org/v1/plot"
 	"gonum.org/v1/plot/palette"
 	"gonum.org/v1/plot/plotter"
@@ -62,14 +61,14 @@ func PlotSpectrogram(cfg *audio.AudioConfig, g generators.Generator, file string
 	g.SetPitch(0.0)
 	g.SetPitch(440.0)
 	values := g.GetSamples(cfg, cfg.SampleRate)
-	frames := spectral.GetSpectralFrames(cfg, values, 1024, 256)
+	frames := GetSpectralFrames(cfg, values, 1024, 256)
 	if err := PlotSpectralFrames(frames, file); err != nil {
 		fmt.Println("error:", err.Error())
 	}
 }
 
 type SpectralGrid struct {
-	Frames      []*spectral.SpectralFrame
+	Frames      []*SpectralFrame
 	FrameLength int
 	Bandwidth   float64
 	Duration    float64
@@ -85,7 +84,7 @@ func (s SpectralGrid) Z(c, r int) float64 { return cmplx.Abs(complex128(s.Frames
 func (s SpectralGrid) X(c int) float64    { return float64(c) * s.Duration }
 func (s SpectralGrid) Y(r int) float64    { return float64(r) * s.Bandwidth }
 
-func PlotSpectralFrames(v []*spectral.SpectralFrame, file string) error {
+func PlotSpectralFrames(v []*SpectralFrame, file string) error {
 	grid := SpectralGrid{
 		Frames:      v,
 		FrameLength: v[0].Length,
