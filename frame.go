@@ -68,8 +68,6 @@ func GetSpectralFrames(cfg *audio.AudioConfig, samples []float64, windowWidth, o
 		result[i] = frame
 		i++
 	}
-	peakTracks := NewSpectralPeakTracksFromSpectralFrames(result)
-	fmt.Println(peakTracks)
 	return result
 }
 
